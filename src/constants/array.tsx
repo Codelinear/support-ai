@@ -3,14 +3,14 @@ import { v4 as uuidv4 } from "uuid";
 export const chatHomePrompts = [
   {
     id: uuidv4(),
-    content: "I need help understanding your services.",
+    content: "Do you offer free consultation?.",
   },
   {
     id: uuidv4(),
-    content: "I want to see your rate card.",
+    content: "What services do you offer?",
   },
   {
     id: uuidv4(),
-    content: "When can I connect with your representative",
+    content: "What payment methods do you accept?",
   },
 ];
