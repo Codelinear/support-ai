@@ -10,11 +10,12 @@ const Contact = () => {
   const [email, setEmail] = useState("");
 
   const changeScreen = useStore((state) => state.changeScreen);
+  const userName = useStore((state) => state.userName);
 
   return (
     <div className="w-[70vw] xl:mx-0 mx-auto xl:w-[35rem] min-[460px]:mt-10">
       <h1 className="text-3xl sm:text-4xl md:text-5xl w-[85%] max-[460px]:mb-5 mb-12 font-bold text-[#D18F5F]">
-        Hello Ricky! How can I contact you?
+        Hello {userName}! How can I contact you?
       </h1>
 
       <div className="">
