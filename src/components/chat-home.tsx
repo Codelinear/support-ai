@@ -10,6 +10,7 @@ const ChatHome = ({
   setMessages: React.Dispatch<React.SetStateAction<any[]>>;
 }) => {
   const chatStatus = useStore((state) => state.chatStatus);
+  const userName = useStore((state) => state.userName);
   const setChatStatus = useStore((state) => state.setChatStatus);
   const setResponseLoading = useStore((state) => state.setResponseLoading);
 
@@ -48,8 +49,8 @@ const ChatHome = ({
     <div className="h-full w-full flex flex-col justify-between">
       <h1 className="text-4xl lg:text-5xl w-3/4 max-[420px]:w-full max-[420px]:text-center md:w-1/2 flex flex-col justify-between font-bold text-[#D18F5F]">
         {chatStatus === "startChat"
-          ? "Thanks a lot Ricky! How can I help you?"
-          : "It was great talking to you Ricky. See you!"}
+          ? `Thanks a lot ${userName}! How can I help you?`
+          : `It was great talking to you ${userName}. See you!`}
       </h1>
       <div className="w-full mb-10 lg:grid hidden grid-cols-3 grid-rows-1">
         {chatHomePrompts.map((prompt, index) => (

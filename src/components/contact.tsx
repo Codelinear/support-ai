@@ -7,6 +7,7 @@ import { useStore } from "@/store";
 const Contact = () => {
   const [emailClick, setEmailClick] = useState(false);
   const [phoneClick, setPhoneClick] = useState(false);
+  const [email, setEmail] = useState("");
 
   const changeScreen = useStore((state) => state.changeScreen);
 
@@ -63,6 +64,7 @@ const Contact = () => {
           </div>
         </div>
 
+        {/* This needs to be update in future. */}
         {emailClick && (
           <form
             onSubmit={() => changeScreen("chat")}
@@ -71,7 +73,11 @@ const Contact = () => {
             <input
               className="bg-transparent placeholder:text-[#0000004D] text-black px-5 mr-3 w-full text-lg font-medium border-none outline-none"
               placeholder="Enter your email"
-              type="text"
+              autoComplete="off"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              type="email"
+              required
             />
             <button
               type="submit"
