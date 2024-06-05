@@ -20,7 +20,7 @@ const ChatMessages = ({
         ref={chatsContainerRef}
         className="absolute top-0 left-0 h-full w-full overflow-scroll scrollbar-hide pb-20"
       >
-F        {messages.map((message) =>
+        {messages.map((message) =>
           message?.type === "user" ? (
             <p key={message.id} className="text-lg font-semibold my-7">
               {message.content}
