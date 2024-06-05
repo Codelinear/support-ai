@@ -1,34 +1,42 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Pinecone } from "@pinecone-database/pinecone";
-// import { OpenAIEmbeddings } from "@langchain/openai";
 import { createStuffDocumentsChain } from "langchain/chains/combine_documents";
 import { ChatPromptTemplate } from "@langchain/core/prompts";
 import { createRetrievalChain } from "langchain/chains/retrieval";
 import { GoogleGenerativeAIEmbeddings } from "@langchain/google-genai";
 import { PineconeStore } from "@langchain/pinecone";
 import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
-import { LangChainAdapter, StreamingTextResponse } from "ai";
+import { ChatOpenAI, OpenAIEmbeddings } from "@langchain/openai";
+import { v4 as uuidv4 } from "uuid";
 
 export const POST = async (req: NextRequest) => {
   try {
     const { message } = await req.json();
 
-    // const lastMessage = messages[messages.length - 1];
-
-    // if (!lastMessage.content) {
-    //   return new NextResponse("No message content", {
-    //     status: 400,
-    //   });
-    // }
-
+    const openaiAPIKey = process.env.OPENAI_API_KEY;
     const pineconeAPIKey = process.env.PINECONE_API_KEY;
-    const pineconeIndexName = process.env.PINECONE_INDEX;
-    const geminiAPIKey = process.env.GEMINI_API_KEY;
+    const pineconeIndexName = process.env.PINECONE_INDEX_NAME;
+    const environment = process.env.ENVIRONMENT;
 
-    if (!pineconeIndexName || !pineconeAPIKey || !geminiAPIKey) {
-      return new NextResponse("env variables is not set properly", {
-        status: 400,
-      });
+    if (!openaiAPIKey) {
+      return NextResponse.json(
+        { error: "OpenAI API key is not set" },
+        { status: 401 }
+      );
+    }
+
+    if (!pineconeAPIKey) {
+      return NextResponse.json(
+        { error: "Pinecone API key is not set" },
+        { status: 401 }
+      );
+    }
+
+    if (!pineconeIndexName) {
+      return NextResponse.json(
+        { error: "Pinecone Index Name is not set" },
+        { status: 401 }
+      );
     }
 
     const pinecone = new Pinecone({
@@ -37,23 +45,73 @@ export const POST = async (req: NextRequest) => {
 
     const pineconeIndex = pinecone.Index(pineconeIndexName);
 
-    const embeddings = new GoogleGenerativeAIEmbeddings({
-      model: "embedding-001", // 768 dimensions
-      apiKey: geminiAPIKey,
-    });
+    let embedModel;
+    let chatModel;
 
-    const vectorStore = await PineconeStore.fromExistingIndex(embeddings, {
+    if (environment === "production") {
+      embedModel = new OpenAIEmbeddings({
+        apiKey: openaiAPIKey,
+        model: "text-embedding-3-large", // 1536 dimensions
+      });
+
+      chatModel = new ChatOpenAI({
+        temperature: 0,
+        apiKey: openaiAPIKey,
+        model: "gpt-3.5-turbo-0125",
+      });
+    } else {
+      if (!process.env.GEMINI_API_KEY) {
+        return NextResponse.json(
+          { error: "Gemini API key is not set" },
+          { status: 401 }
+        );
+      }
+
+      embedModel = new GoogleGenerativeAIEmbeddings({
+        model: "embedding-001", // 768 dimensions
+        apiKey: process.env.GEMINI_API_KEY,
+      });
+
+      chatModel = new ChatGoogleGenerativeAI({
+        temperature: 0,
+        apiKey: process.env.GEMINI_API_KEY,
+        model: "gemini-pro",
+      });
+    }
+
+    const vectorStore = await PineconeStore.fromExistingIndex(embedModel, {
       pineconeIndex,
     });
 
-    const chatModel = new ChatGoogleGenerativeAI({
-      apiKey: geminiAPIKey,
-      model: "gemini-pro",
-    });
+    // const qaSystemPrompt = `You are Support.AI - a chatbot designed to help customers with their support needs. Use the following pieces of context to answer the question.
+    // \n\n
+    // {context}
+    // \n\n
+    // You must take care the following points while answering the question:
+    // \n\n
+    // 1. Do not answer the question if you are not sure about the answer.
+    // \n
+    // 2. Understand and double check the question very well and find the similar question in the context and then answer that question from the context.
+    // \n
+    // 3. If the question is completely different from the context or the answer isn't there, then say that "Please ask the relevant question from customer support."
+    // \n
+    // 4. The question from the user may not be completely clear or congruent with the questions in the context. In that case, you would find the similar question to that of the user's question and answer that question from the context.
+    // `;
 
-    const qaSystemPrompt = `You are an assistant for question-answering tasks. Use the following pieces of retrieved context to answer the question. If you don't know the answer, just say that you don't know. Use three sentences maximum and keep the answer concise.
-  \n\n
-  {context}`;
+    const qaSystemPrompt = `You are Support.AI, a chatbot designed to assist customers with their support needs. Use the following pieces of context to answer the question.
+    \n\n\n
+    {context}
+    \n\n\n
+    Guidelines:
+    \n\n
+    1. If you are unsure about the answer, do not respond to the question.
+    \n\n
+    2. Ensure you thoroughly understand the question. Look for a similar question in the provided context and use that to form your response.
+    \n\n
+    3. If the question is completely different from the context or if the answer is not available in the context, respond with: "Please ask the relevant question from customer support."
+    \n\n
+    4. If the user's question is unclear or doesn't exactly match the context, find the most similar question within the context and answer that.
+    `;
 
     const qaPromptTemplate = ChatPromptTemplate.fromMessages([
       ["system", qaSystemPrompt],
@@ -71,17 +129,9 @@ export const POST = async (req: NextRequest) => {
       retriever,
     });
 
-    // const answerStream = await retrievalChain.stream({
-    //   input: lastMessage.content,
-    // });
-
     const response = await retrievalChain.invoke({
-      // input: lastMessage.content,
       input: message,
     });
-
-    console.log(response);
-    console.log(response.answer);
 
     // const transformedStream = new ReadableStream({
     //   async start(controller) {
@@ -99,12 +149,10 @@ export const POST = async (req: NextRequest) => {
     //   },
     // });
 
-    // const stream = LangChainAdapter.toAIStream(transformedStream);
-
-    // return new StreamingTextResponse(stream);
     return NextResponse.json(
       {
         message: {
+          id: uuidv4(),
           type: "ai",
           content: response.answer,
         },
@@ -112,7 +160,6 @@ export const POST = async (req: NextRequest) => {
       { status: 200 }
     );
   } catch (error) {
-    console.log(`error is happening in the backend: ${error}`);
     return NextResponse.json({ error }, { status: 500 });
   }
 };

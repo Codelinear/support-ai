@@ -3,6 +3,7 @@ import Arrow from "@/components/icons/arrow";
 import { useStore } from "@/store";
 import ChatHome from "./chat-home";
 import ChatMessages from "./chat-messages";
+import { v4 as uuidv4 } from "uuid";
 
 const Chat = () => {
   const [input, setInput] = useState("");
@@ -38,6 +39,7 @@ const Chat = () => {
     }
 
     const humanMessage = {
+      id: uuidv4(),
       type: "user",
       content: input,
     };

@@ -20,13 +20,13 @@ const ChatMessages = ({
         className="absolute top-0 left-0 h-full w-full overflow-scroll scrollbar-hide pb-20"
       >
         {/* require fixing here, remove index with actual uuid */}
-        {messages.map((message, index) =>
+        {messages.map((message) =>
           message.type === "user" ? (
-            <p key={index} className="text-lg font-semibold my-7">
+            <p key={message.id} className="text-lg font-semibold my-7">
               {message.content}
             </p>
           ) : (
-            <p key={index} className="text-base opacity-80">
+            <p key={message.id} className="text-base opacity-80">
               {message.content}
             </p>
           )
@@ -58,7 +58,9 @@ const ChatMessages = ({
                 onClick={() => setChatStatus("returnChat")}
                 className="flex items-center rounded-lg p-3 cursor-pointer bg-[#FFFFFF66] justify-center"
               >
-                <p className="max-[420px]:text-xs">That’s all for now. Thanks!</p>
+                <p className="max-[420px]:text-xs">
+                  That’s all for now. Thanks!
+                </p>
                 <div className="bg-[#D18F5F] flex p-2 items-center justify-center rounded-full h-8 w-8 ml-2">
                   <Arrow />
                 </div>

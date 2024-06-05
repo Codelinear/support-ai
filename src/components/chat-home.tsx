@@ -2,6 +2,7 @@ import React, { useCallback } from "react";
 import QuestionMark from "./icons/question-mark";
 import { chatHomePrompts } from "@/constants/array";
 import { useStore } from "@/store";
+import { v4 as uuidv4 } from "uuid";
 
 const ChatHome = ({
   setMessages,
@@ -19,6 +20,7 @@ const ChatHome = ({
       }
 
       const humanMessage = {
+        id: uuidv4(),
         type: "user",
         content: prompt,
       };
