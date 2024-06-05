@@ -4,10 +4,11 @@ import { useStore } from "@/store";
 import ChatHome from "./chat-home";
 import ChatMessages from "./chat-messages";
 import { v4 as uuidv4 } from "uuid";
+import { Message } from "@/types";
 
 const Chat = () => {
   const [input, setInput] = useState("");
-  const [messages, setMessages] = useState<any[]>([]);
+  const [messages, setMessages] = useState<Message[]>([]);
 
   const chatStatus = useStore((state) => state.chatStatus);
   const setChatStatus = useStore((state) => state.setChatStatus);
@@ -38,7 +39,7 @@ const Chat = () => {
       setChatStatus("chatting");
     }
 
-    const humanMessage = {
+    const humanMessage: Message = {
       id: uuidv4(),
       type: "user",
       content: input,

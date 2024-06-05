@@ -2,12 +2,13 @@ import { useStore } from "@/store";
 import React, { MutableRefObject } from "react";
 import { BeatLoader } from "react-spinners";
 import Arrow from "@/components/icons/arrow";
+import { Message } from "@/types";
 
 const ChatMessages = ({
   messages,
   chatsContainerRef,
 }: {
-  messages: any[];
+  messages: Message[];
   chatsContainerRef: MutableRefObject<HTMLDivElement | null>;
 }) => {
   const responseLoading = useStore((state) => state.responseLoading);
@@ -19,9 +20,8 @@ const ChatMessages = ({
         ref={chatsContainerRef}
         className="absolute top-0 left-0 h-full w-full overflow-scroll scrollbar-hide pb-20"
       >
-        {/* require fixing here, remove index with actual uuid */}
-        {messages.map((message) =>
-          message.type === "user" ? (
+F        {messages.map((message) =>
+          message?.type === "user" ? (
             <p key={message.id} className="text-lg font-semibold my-7">
               {message.content}
             </p>

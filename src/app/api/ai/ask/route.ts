@@ -51,7 +51,7 @@ export const POST = async (req: NextRequest) => {
     if (environment === "production") {
       embedModel = new OpenAIEmbeddings({
         apiKey: openaiAPIKey,
-        model: "text-embedding-3-large", // 1536 dimensions
+        model: "text-embedding-3-small", // 1536 dimensions
       });
 
       chatModel = new ChatOpenAI({
@@ -160,6 +160,7 @@ export const POST = async (req: NextRequest) => {
       { status: 200 }
     );
   } catch (error) {
+    console.error(error);
     return NextResponse.json({ error }, { status: 500 });
   }
 };
