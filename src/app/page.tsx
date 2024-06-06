@@ -26,7 +26,7 @@ export default function Home() {
   return (
     <main className="bg-[#eeeeee] relative h-screen">
       <div
-        className={`absolute z-[1] backdrop-blur-3xl h-full ${
+        className={`absolute z-[1] h-full ${
           screen === "home" ? "md:px-40" : screen === "chat" ? "xl:px-40" : "xl:px-40"
         } py-28 w-full top-0 left-0`}
       >
@@ -36,8 +36,8 @@ export default function Home() {
       <div className="absolute top-0 h-full w-full overflow-hidden left-0">
         {chatStatus !== "chatting" && (
           <>
-            <div className="bg-[#BE988C] top-[-43%] left-[-39%] h-[1000px] w-[1000px] rounded-full opacity-10 absolute"></div>
-            <div className="bg-[#BE988C] top-[18%] left-[57%] h-[1000px] w-[1000px] rounded-full opacity-10 absolute"></div>
+            <div className="bg-[#BE988C] blur-3xl top-[-43%] left-[-39%] h-[76vw] w-[76vw] rounded-full opacity-10 absolute"></div>
+            <div className="bg-[#BE988C] blur-3xl top-[18%] left-[57%] h-[76vw] w-[76vw] rounded-full opacity-10 absolute"></div>
           </>
         )}
       </div>

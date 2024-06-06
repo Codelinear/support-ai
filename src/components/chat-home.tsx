@@ -1,8 +1,9 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import QuestionMark from "./icons/question-mark";
 import { chatHomePrompts } from "@/constants/array";
 import { useStore } from "@/store";
 import { v4 as uuidv4 } from "uuid";
+import { getRandomSuggestions } from "@/lib/functions/randomSelector";
 
 const ChatHome = ({
   setMessages,
@@ -13,6 +14,14 @@ const ChatHome = ({
   const userName = useStore((state) => state.userName);
   const setChatStatus = useStore((state) => state.setChatStatus);
   const setResponseLoading = useStore((state) => state.setResponseLoading);
+
+  const [promptSuggestions, setPromptSuggestions] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (chatStatus !== "chatting") {
+      setPromptSuggestions(getRandomSuggestions());
+    }
+  }, [chatStatus]);
 
   const onPromptClick = useCallback(
     async (prompt: string) => {
@@ -52,21 +61,17 @@ const ChatHome = ({
           ? `Thanks a lot ${userName}! How can I help you?`
           : `It was great talking to you ${userName}. See you!`}
       </h1>
-      <div className="w-full mb-10 lg:grid hidden grid-cols-3 grid-rows-1">
-        {chatHomePrompts.map((prompt, index) => (
+      <div className="w-full mb-10 flex justify-between overflow-x-scroll scrollbar-hide">
+        {promptSuggestions.map((prompt) => (
           <div
-            key={prompt.id}
-            className={`p-4 h-32 cursor-pointer rounded-xl bg-white ${
-              index === 1 && "mx-3"
-            }`}
-            onClick={() => onPromptClick(prompt.content)}
+            key={uuidv4()}
+            className={`p-4 min-w-96 max-w-[28rem] h-32 cursor-pointer rounded-xl bg-white mx-3`}
+            onClick={() => onPromptClick(prompt)}
           >
             <div className="bg-[#D18F5F] mb-2 rounded-full h-9 w-9 flex items-center justify-center">
               <QuestionMark />
             </div>
-            <p className="font-semibold text-base text-start">
-              {prompt.content}
-            </p>
+            <p className="font-semibold text-base h-12 overflow-y-scroll scrollbar-hide text-start">{prompt}</p>
           </div>
         ))}
       </div>

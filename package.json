@@ -16,6 +16,7 @@
     "@langchain/pinecone": "^0.0.7",
     "@pinecone-database/pinecone": "^2.2.2",
     "ai": "^3.1.23",
+    "axios": "^1.7.2",
     "langchain": "^0.2.4",
     "mammoth": "^1.7.2",
     "next": "14.2.3",

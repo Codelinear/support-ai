@@ -75,6 +75,7 @@ const Chat = () => {
         ) : (
           <ChatMessages
             chatsContainerRef={chatsContainerRef}
+            setMessages={setMessages}
             messages={messages}
           />
         )}

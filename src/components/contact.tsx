@@ -42,7 +42,7 @@ const Contact = () => {
             </div>
           </div>
 
-          <div
+          {/* <div
             className={`bg-[#ffffff] mt-3 sm:ml-3 sm:mt-0 max-[460px]:w-60 w-80 h-20 sm:h-32 ${
               phoneClick ? "border border-[#F67B36]" : "border-none"
             } rounded-xl`}
@@ -62,7 +62,7 @@ const Contact = () => {
                 I prefer phone calls.
               </span>
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* This needs to be update in future. */}

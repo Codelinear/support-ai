@@ -6,9 +6,11 @@ import { Message } from "@/types";
 
 const ChatMessages = ({
   messages,
+  setMessages,
   chatsContainerRef,
 }: {
   messages: Message[];
+  setMessages: (messages: Message[]) => void;
   chatsContainerRef: MutableRefObject<HTMLDivElement | null>;
 }) => {
   const responseLoading = useStore((state) => state.responseLoading);
@@ -55,7 +57,10 @@ const ChatMessages = ({
               </h2>
 
               <div
-                onClick={() => setChatStatus("returnChat")}
+                onClick={() => {
+                  setMessages([]);
+                  setChatStatus("returnChat");
+                }}
                 className="flex items-center rounded-lg p-3 cursor-pointer bg-[#FFFFFF66] justify-center"
               >
                 <p className="max-[420px]:text-xs">
