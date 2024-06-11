@@ -2,6 +2,8 @@ import { ChatOpenAI } from "@langchain/openai";
 import { NextRequest, NextResponse } from "next/server";
 import { HumanMessage, SystemMessage } from "@langchain/core/messages";
 
+export const maxDuration = 60;
+
 export const POST = async (req: NextRequest) => {
   try {
     const { name } = await req.json();

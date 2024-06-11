@@ -9,6 +9,8 @@ import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 import { ChatOpenAI, OpenAIEmbeddings } from "@langchain/openai";
 import { v4 as uuidv4 } from "uuid";
 
+export const maxDuration = 60;
+
 export const POST = async (req: NextRequest) => {
   try {
     const { message } = await req.json();

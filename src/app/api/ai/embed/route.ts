@@ -5,6 +5,8 @@ import { PineconeStore } from "@langchain/pinecone";
 import { OpenAIEmbeddings } from "@langchain/openai";
 import { NextResponse } from "next/server";
 
+export const maxDuration = 60;
+
 export const POST = async () => {
   try {
     const openaiAPIKey = process.env.OPENAI_API_KEY;
