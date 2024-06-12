@@ -34,7 +34,7 @@ export const POST = async () => {
       );
     }
 
-    const loader = new DocxLoader("public/documents/contactBotData.docx");
+    const loader = new DocxLoader("public/documents/SDU-questions.docx");
 
     const docs = await loader.load();
 

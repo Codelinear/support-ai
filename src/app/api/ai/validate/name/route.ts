@@ -19,7 +19,7 @@ export const POST = async (req: NextRequest) => {
 
     const messages = [
       new SystemMessage(
-        "Your job is to extract the name from the user's message which can be a sentence, word or it's name too, but if the name is invalid then return the boolean value 'false' only."
+        "Your job is to extract the name from the user's message which can be a sentence, word or it's name too, but if the name is invalid or not a human name then return the boolean value 'false' only."
       ),
       new HumanMessage(name),
     ];
