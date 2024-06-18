@@ -24,11 +24,11 @@ const ChatMessages = ({
       >
         {messages.map((message) =>
           message?.type === "user" ? (
-            <p key={message.id} className="text-lg font-semibold my-7">
+            <p key={message.id} className="text-xl my-7">
               {message.content}
             </p>
           ) : (
-            <p key={message.id} className="text-base opacity-80">
+            <p key={message.id} className="text-lg opacity-80">
               {message.content}
             </p>
           )
@@ -45,11 +45,11 @@ const ChatMessages = ({
       <div
         style={{
           background:
-            "linear-gradient(to top, #eee, #eee, #eee, #eee, transparent)",
+            "linear-gradient(to top, #eee, #eee, #eee, #eeec, transparent)",
         }}
-        className="absolute h-[5rem] flex items-end z-[1] w-full bottom-0 left-0"
+        className="absolute h-[7rem] flex items-end z-[1] w-full bottom-0 left-0"
       >
-        <div className="w-full absolute bottom-0 left-0 flex items-center justify-between">
+        <div className="w-full absolute bottom-[-7px] left-0 flex items-center justify-between">
           {messages.length >= 2 && (
             <>
               <h2 className="max-[420px]:text-base text-xl sm:text-3xl text-[#D18F5F]">

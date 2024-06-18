@@ -14,7 +14,7 @@ const Contact = () => {
 
   return (
     <div className="w-[70vw] xl:mx-0 mx-auto xl:w-[35rem] min-[460px]:mt-10">
-      <h1 className="text-3xl sm:text-4xl md:text-5xl w-[85%] max-[460px]:mb-5 mb-12 font-bold text-[#D18F5F]">
+      <h1 className="text-3xl sm:text-4xl md:text-[3.5rem] md:leading-[1] w-[90%] max-[460px]:my-5 my-[4.5rem] text-[#D18F5F]">
         Hello {userName}! How can I contact you?
       </h1>
 
@@ -69,7 +69,7 @@ const Contact = () => {
         {emailClick && (
           <form
             onSubmit={() => changeScreen("chat")}
-            className="bg-white rounded-full p-[0.6rem] flex justify-between items-center"
+            className="bg-white rounded-full w-[82%] p-[0.7rem] flex justify-between items-center"
           >
             <input
               className="bg-transparent placeholder:text-[#0000004D] text-black px-5 mr-3 w-full text-lg font-medium border-none outline-none"

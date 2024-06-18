@@ -24,12 +24,10 @@ export default function Home() {
   }
 
   return (
-    <main className={`bg-[#eeeeee] relative h-screen ${
-      screen === "chat" ? "max-sm:h-[110vh] h-screen" : "h-screen"
-    }`}>
+    <main className={`bg-[#eeeeee] relative h-screen`}>
       <div
-        className={`absolute z-[1] bg-[#eeeeee] sm:h-full ${
-          screen === "home" ? "md:px-40" : screen === "chat" ? "xl:px-40 h-[110%]" : "xl:px-40"
+        className={`absolute z-[1] bg-[#eeeeee] h-full ${
+          screen === "home" ? "md:px-40" : screen === "chat" ? "xl:px-40" : "xl:px-40"
         } pt-28 w-full top-0 left-0`}
       >
         <Logo />

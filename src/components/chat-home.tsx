@@ -55,7 +55,7 @@ const ChatHome = ({
 
   return (
     <div className="h-full w-full flex flex-col justify-evenly sm:justify-between">
-      <h1 className="max-[520px]:text-3xl text-4xl lg:text-5xl w-3/4 max-[420px]:w-full max-[420px]:text-center md:w-1/2 flex flex-col justify-between font-bold text-[#D18F5F]">
+      <h1 className="max-[520px]:text-3xl text-4xl lg:text-[3.5rem] sm:leading-[1] w-3/4 max-[420px]:w-full max-[420px]:text-center md:w-[60%] my-[3rem] flex flex-col justify-between text-[#D18F5F]">
         {chatStatus === "startChat"
           ? `Thanks a lot ${userName}! How can I help you?`
           : `It was great talking to you ${userName}. See you!`}

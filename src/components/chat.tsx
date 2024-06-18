@@ -68,8 +68,8 @@ const Chat = () => {
   };
 
   return (
-    <div className="w-[85vw] sm:w-[70vw] max-sm:h-[31rem] xl:mx-0 mx-auto xl:w-[55rem] flex flex-col justify-between">
-      <div className="h-[65rem] sm:h-[65vh] w-full">
+    <div className="w-[85vw] sm:w-[70vw] max-sm:h-[80vh] xl:mx-0 mx-auto xl:w-[59rem] flex flex-col justify-between">
+      <div className="h-[65rem] sm:h-[67vh] w-full">
         {chatStatus !== "chatting" ? (
           <ChatHome setMessages={setMessages} />
         ) : (
@@ -83,7 +83,7 @@ const Chat = () => {
 
       <form
         onSubmit={submitHandler}
-        className="bg-white rounded-full p-[0.6rem] flex w-full items-center"
+        className="bg-white rounded-full sm:mt-4 p-[0.6rem] flex w-full items-center"
       >
         <input
           className="bg-transparent placeholder:text-[#0000004D] text-black px-5 mr-3 w-full text-lg font-medium border-none outline-none"
