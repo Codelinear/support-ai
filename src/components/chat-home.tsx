@@ -54,7 +54,7 @@ const ChatHome = ({
   );
 
   return (
-    <div className="h-full w-full flex flex-col justify-evenly">
+    <div className="h-full w-full flex flex-col justify-between">
       <h1 className="max-[520px]:text-3xl text-4xl lg:text-5xl w-3/4 max-[420px]:w-full max-[420px]:text-center md:w-1/2 flex flex-col justify-between font-bold text-[#D18F5F]">
         {chatStatus === "startChat"
           ? `Thanks a lot ${userName}! How can I help you?`
@@ -64,7 +64,7 @@ const ChatHome = ({
         {promptSuggestions.map((prompt) => (
           <div
             key={uuidv4()}
-            className={`p-4 w-full h-32 cursor-pointer rounded-xl bg-white m-3`}
+            className={`p-4 w-full h-32 cursor-pointer rounded-xl bg-white my-3 sm:my-6 mx-3`}
             onClick={() => onPromptClick(prompt)}
           >
             <div className="bg-[#D18F5F] mb-2 rounded-full h-9 w-9 flex items-center justify-center">
