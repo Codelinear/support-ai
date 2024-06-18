@@ -70,7 +70,7 @@ const ChatHome = ({
             <div className="bg-[#D18F5F] mb-2 rounded-full h-9 w-9 flex items-center justify-center">
               <QuestionMark />
             </div>
-            <p className="text-base h-12 overflow-y-scroll scrollbar-hide text-start">Who should I contact for Risk & Assurance?</p>
+            <p className="text-base h-12 overflow-y-scroll scrollbar-hide text-start">{prompt}</p>
           </div>
         ))}
       </div>
