@@ -68,7 +68,7 @@ const Chat = () => {
   };
 
   return (
-    <div className="w-[85vw] sm:w-[70vw] xl:mx-0 mx-auto xl:w-[55rem] flex flex-col justify-between">
+    <div className="w-[85vw] sm:w-[70vw] max-sm:h-[31rem] xl:mx-0 mx-auto xl:w-[55rem] flex flex-col justify-between">
       <div className="h-[65vh] w-full">
         {chatStatus !== "chatting" ? (
           <ChatHome setMessages={setMessages} />

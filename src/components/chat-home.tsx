@@ -54,23 +54,23 @@ const ChatHome = ({
   );
 
   return (
-    <div className="h-full w-full flex flex-col justify-between">
-      <h1 className="text-4xl lg:text-5xl w-3/4 max-[420px]:w-full max-[420px]:text-center md:w-1/2 flex flex-col justify-between font-bold text-[#D18F5F]">
+    <div className="h-full w-full flex flex-col justify-evenly">
+      <h1 className="max-[520px]:text-3xl text-4xl lg:text-5xl w-3/4 max-[420px]:w-full max-[420px]:text-center md:w-1/2 flex flex-col justify-between font-bold text-[#D18F5F]">
         {chatStatus === "startChat"
           ? `Thanks a lot ${userName}! How can I help you?`
           : `It was great talking to you ${userName}. See you!`}
       </h1>
-      <div className="w-full mb-10 flex justify-between overflow-x-scroll scrollbar-hide">
+      <div className="w-full mb-10 flex sm:my-0 my-8 sm:flex-row flex-col justify-between items-center">
         {promptSuggestions.map((prompt) => (
           <div
             key={uuidv4()}
-            className={`p-4 min-w-96 max-w-[28rem] h-32 cursor-pointer rounded-xl bg-white mx-3`}
+            className={`p-4 w-full h-32 cursor-pointer rounded-xl bg-white m-3`}
             onClick={() => onPromptClick(prompt)}
           >
             <div className="bg-[#D18F5F] mb-2 rounded-full h-9 w-9 flex items-center justify-center">
               <QuestionMark />
             </div>
-            <p className="font-semibold text-base h-12 overflow-y-scroll scrollbar-hide text-start">{prompt}</p>
+            <p className="text-base h-12 overflow-y-scroll scrollbar-hide text-start">Who should I contact for Risk & Assurance?</p>
           </div>
         ))}
       </div>
