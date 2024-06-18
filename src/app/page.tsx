@@ -24,8 +24,8 @@ export default function Home() {
   }
 
   return (
-    <main className={`bg-[#eeeeee] relative sm:h-screen ${
-      screen === "chat" && "h-[110vh]"
+    <main className={`bg-[#eeeeee] relative h-screen ${
+      screen === "chat" ? "max-sm:h-[110vh] h-screen" : "h-screen"
     }`}>
       <div
         className={`absolute z-[1] bg-[#eeeeee] sm:h-full ${
