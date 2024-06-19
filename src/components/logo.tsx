@@ -15,9 +15,9 @@ const Logo = () => {
       </h2>
       <div
         className="flex hover:underline transition text-[10px] items-center cursor-pointer justify-end ml-auto"
-        onClick={() => router.push("https://codelinear.com/")}
+        onClick={() => window.open("https://codelinear.com/", "_blank")}
       >
-        <h4 className="mr-1">by Codelinear</h4>
+        <h4 className="mr-1 mt-[0.05rem]">by Codelinear</h4>
         <Redirect />
       </div>
     </header>
