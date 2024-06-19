@@ -11,8 +11,8 @@ const Main = () => {
   const setUserName = useStore((state) => state.setUserName);
 
   return (
-    <div className="w-[80vw] sm:w-[38.5rem] md:mx-0 mx-auto mt-14">
-      <h1 className="text-4xl sm:mx-0 mx-4 sm:text-[3.5rem] sm:leading-[1] md:text-start text-center md:w-[80%] mb-12 text-[#D18F5F] my-[5rem]">
+    <div className="w-[80vw] sm:w-[38.5rem] min-[840px]:mx-0 mx-auto mt-14">
+      <h1 className="text-4xl sm:mx-0 mx-4 sm:text-[3.5rem] sm:leading-[1] min-[840px]:text-start text-center min-[840px]:w-[80%] mb-12 text-[#D18F5F] my-[5rem]">
         Hello! I’m Support.AI. What’s your name?
       </h1>
       <div className="bg-white rounded-full p-[0.6rem] flex justify-between items-center">

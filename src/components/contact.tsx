@@ -14,7 +14,7 @@ const Contact = () => {
 
   return (
     <div className="w-[70vw] xl:mx-0 mx-auto xl:w-[35rem] min-[460px]:mt-10">
-      <h1 className="text-3xl sm:text-4xl md:text-[3.5rem] md:leading-[1] w-[90%] max-[460px]:my-5 my-[4.5rem] text-[#D18F5F]">
+      <h1 className="text-3xl sm:text-4xl md:text-[3.5rem] md:leading-[1] w-[90%] max-[460px]:my-5 my-[10vh] text-[#D18F5F]">
         Hello {userName}! How can I contact you?
       </h1>
 
