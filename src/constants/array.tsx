@@ -17,7 +17,7 @@
 //   "How can I contact you?",
 // ];
 
-const questions = [
+export const questions = [
   "Who is IEA?",
   "What kind of educational programs does IEA offer?",
   "Does IEA offer LIVE classes?",
