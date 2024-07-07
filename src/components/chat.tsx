@@ -1,20 +1,18 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import Arrow from "@/components/icons/arrow";
 import { useStore } from "@/store";
 import ChatHome from "./chat-home";
 import ChatMessages from "./chat-messages";
 import { v4 as uuidv4 } from "uuid";
 import { Message } from "@/types";
+import OrangeButton from "./icons/orange-button";
 
 const Chat = () => {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
 
-  const chatStatus = useStore((state) => state.chatStatus);
-  const setChatStatus = useStore((state) => state.setChatStatus);
-  const setResponseLoading = useStore((state) => state.setResponseLoading);
-
-  const chatsContainerRef = useRef<HTMLDivElement | null>(null);
+  const { chatStatus, setChatStatus, setResponseLoading, responseLoading } =
+    useStore();
 
   const handleInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,15 +20,6 @@ const Chat = () => {
     },
     [setInput]
   );
-
-  const goToBottom = () => {
-    chatsContainerRef.current?.scrollTo({
-      top:
-        chatsContainerRef.current?.scrollHeight +
-        chatsContainerRef.current?.offsetHeight,
-      behavior: "smooth",
-    });
-  };
 
   const submitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -49,8 +38,6 @@ const Chat = () => {
 
     setMessages((prev) => [...prev, humanMessage]);
 
-    goToBottom();
-
     setResponseLoading(true);
 
     const res = await fetch("/api/ai/ask", {
@@ -62,22 +49,16 @@ const Chat = () => {
 
     setResponseLoading(false);
 
-    goToBottom();
-
     setMessages((prev) => [...prev, data.message]);
   };
 
   return (
-    <div className="w-[85vw] sm:w-[70vw] h-[75vh] xl:mx-0 mx-auto xl:w-[59rem] flex flex-col justify-between">
-      <div className="h-[65rem] sm:h-[67vh] w-full">
+    <div className="w-[85vw] sm:w-[70vw] xl:mx-0 mx-auto xl:w-[59rem] flex flex-col justify-between">
+      <div className="w-full">
         {chatStatus !== "chatting" ? (
           <ChatHome setMessages={setMessages} />
         ) : (
-          <ChatMessages
-            chatsContainerRef={chatsContainerRef}
-            setMessages={setMessages}
-            messages={messages}
-          />
+          <ChatMessages setMessages={setMessages} messages={messages} />
         )}
       </div>
 
@@ -92,11 +73,9 @@ const Chat = () => {
           onChange={handleInputChange}
           type="text"
         />
-        <button
-          type="submit"
-          className="bg-[#F67B36] flex items-center justify-center rounded-full p-3 w-10 h-10"
-        >
-          <Arrow />
+
+        <button type="submit">
+          <OrangeButton />
         </button>
       </form>
     </div>

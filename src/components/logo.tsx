@@ -8,7 +8,7 @@ const Logo = () => {
   return (
     <header
       id="logo"
-      className="absolute z-[1] top-[5%] text-[#202020] left-[4%]"
+      className="absolute z-[1] sm:left-[3.4rem] left-[4%] top-[5%] sm:top-6 text-[#202020]"
     >
       <h2 className="font-medium text-2xl pointer-events-none">
         Support.AI

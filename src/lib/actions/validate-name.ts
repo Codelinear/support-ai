@@ -1,21 +1,11 @@
+"use server";
+
 import { ChatOpenAI } from "@langchain/openai";
-import { NextRequest, NextResponse } from "next/server";
 import { HumanMessage, SystemMessage } from "@langchain/core/messages";
 
-export const maxDuration = 60;
-
-export const POST = async (req: NextRequest) => {
+export const validateName = async (name: string) => {
   try {
-    const { name } = await req.json();
-
     const openaiAPIKey = process.env.OPENAI_API_KEY;
-
-    if (!name) {
-      return NextResponse.json(
-        { error: "Please provide a name" },
-        { status: 400 }
-      );
-    }
 
     const messages = [
       new SystemMessage(
@@ -32,9 +22,10 @@ export const POST = async (req: NextRequest) => {
 
     const isCorrect = await llm.invoke(messages);
 
-    return NextResponse.json({ isCorrect }, { status: 200 });
-  } catch (error) {
-    console.error(error);
-    return NextResponse.json({ error }, { status: 500 });
+    return { isCorrect: isCorrect.content };
+  } catch (error: any) {
+    return {
+      error: error.message,
+    };
   }
 };

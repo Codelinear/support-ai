@@ -3,8 +3,11 @@ import { graphik } from "@/lib/fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Contact GPT",
+  title: "Support AI",
   description: "",
+  icons: {
+    icon: "/favicon.svg"
+  }
 };
 
 export default function RootLayout({

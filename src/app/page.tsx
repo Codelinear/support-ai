@@ -4,7 +4,6 @@ import Chat from "@/components/chat";
 import Contact from "@/components/contact";
 import Main from "@/components/main";
 import { useStore } from "@/store";
-// import { useChat } from "ai/react";
 import { ReactNode, useRef } from "react";
 import Logo from "@/components/logo";
 
@@ -25,13 +24,10 @@ export default function Home() {
 
   return (
     <main
-      className={`bg-[#eeeeee] relative h-screen ${
-        screen === "chat" &&
-        "max-sm:h-[170vh] lg:h-[110vh] xl:h-screen"
-      }`}
+      className={`bg-[#eeeeee] pb-10 relative min-h-screen`}
     >
       <div
-        className={`absolute z-[1] bg-[#eeeeee] h-full ${
+        className={`relative z-[1] h-full ${
           screen === "home"
             ? "min-[840px]:px-40"
             : screen === "chat"
@@ -45,8 +41,8 @@ export default function Home() {
       <div className="absolute top-0 h-full w-full overflow-hidden left-0">
         {chatStatus !== "chatting" && (
           <>
-            <div className="bg-[#BE988C] blur-3xl top-[-43%] left-[-39%] h-[76vw] w-[76vw] rounded-full opacity-10 absolute"></div>
-            <div className="bg-[#BE988C] blur-3xl top-[18%] left-[57%] h-[76vw] w-[76vw] rounded-full opacity-10 absolute"></div>
+            <div className="bg-[#BE988C] blur-2xl top-[-43%] left-[-39%] h-[76vw] w-[76vw] rounded-full opacity-10 absolute"></div>
+            <div className="bg-[#BE988C] blur-2xl top-[18%] left-[57%] h-[76vw] w-[76vw] rounded-full opacity-10 absolute"></div>
           </>
         )}
       </div>
