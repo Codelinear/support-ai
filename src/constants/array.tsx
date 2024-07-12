@@ -1,39 +1,16 @@
-// export const questions = [
-//   "Who are SDU?",
-//   "Why should I work with you?",
-//   "What do you mean by FORD?",
-//   "How big is SDU?",
-//   "Who should I contact for Direct Taxes?",
-//   "Who should I contact for Indirect Taxes?",
-//   "Who should I contact for Business Consulting?",
-//   "Who should I contact for a Statutory Audit?",
-//   "Who should I contact for Risk & Assurance?",
-//   "What does SDU specialize in?",
-//   "What do you specialize in?",
-//   "What services do you offer?",
-//   "Give me a brief about your services.",
-//   "Do you have any openings?",
-//   "Where are you located?",
-//   "How can I contact you?",
-// ];
-
 export const questions = [
-  "Who is IEA?",
-  "What kind of educational programs does IEA offer?",
-  "Does IEA offer LIVE classes?",
-  "Do I have to set up a profile to take a class?",
-  "Are IEA courses recognized in all 50 states?",
-  "I took classes with you a long time ago. How do I get a transcript?",
-  "Does IEA offer Payment Plans?",
-  "What do you provide?",
-  "What services do you offer?",
-  "How big is IEA?",
-  "What are your popular certifications?",
-  "What are your popular classes?",
-  "Where are you located?",
-  "What do you specialize in?",
-  "How can I contact you?"
+  "What is vacaystay406.com?",
+  "What features does vacaystay406.com offer?",
+  "What payment methods does vacaystay406.com accept?",
+  "What are the amenities at The Ranch House 406?",
+  "What are the check-in and check-out policies for The Ranch House 406?",
+  "Are pets allowed at The Ranch House 406?",
+  "Does The Ranch House 406 allow events, parties, or large gatherings?",
+  "What is the capacity of The Ranch House 406?",
+  "What is vacaystay406.com's customer service number?",
+  "How do I contact vacaystay406.com?"
 ];
+
 
 export const countryPhoneCodes = [
   "+93", "+355", "+213", "+376", "+244", "+1-268", "+54", "+374", "+61", "+43",

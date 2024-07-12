@@ -34,7 +34,7 @@ export const POST = async () => {
       );
     }
 
-    const loader = new DocxLoader("public/documents/IEA-questions.docx");
+    const loader = new DocxLoader("public/documents/Vacaystay Support.AI.docx");
 
     const docs = await loader.load();
 
